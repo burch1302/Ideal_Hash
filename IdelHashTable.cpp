@@ -7,21 +7,21 @@ using namespace std;
 
 class HashTable {
 private:
-	static const int hashGroups = 10;//amount of lists
-	//��� ����� �������� ����� ������� ����� ��������� � ���� ������� � �������� 
-	//� ������ ���� ������ � ���� ���� , �� ���� ���� � �������� 
+	static const int hashGroups = 10;//Кількість двозвьязних списків які ми будемо використовувати.
+        //
 	list<pair<int, string>> table[hashGroups]; // list 1 , index 0 , list 2 index 1...
+	//цей запис утворюе масив Table розмірністю hashGroups , який будет мати у собі списки які у свою чергу матимуть у собі два значення (int, string)
 
 public:
-	bool isEmpty() const;
-	int hashFunc(int key);
-	void insertItem(int key, string value);
-	void removeItem(int key);
-	string serchTable(int key);
-	void printTable();
+	bool isEmpty() const;//перевіряе на наявність елементів у хеш-таблиці
+	int hashFunc(int key);//хеш-функція
+	void insertItem(int key, string value);//вставка елементів у хеш-таблицю
+	void removeItem(int key);//видалення елементів
+	string serchTable(int key);//пошук елементу у таблиці
+	void printTable();//виведення усієї таблиці
 
 };
-
+//утворюэмо метод isEmpty з класу HashTable
 bool HashTable::isEmpty() const{
 	int sum{};
 	for (int i{}; i < hashGroups; i++) {
