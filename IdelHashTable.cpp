@@ -23,9 +23,9 @@ public:
 };
 //утворюэмо метод isEmpty з класу HashTable
 bool HashTable::isEmpty() const{
-	int sum{};
+	int sum{};// фігурні дужки автоматично присвоють змінній sum нульове значення
 	for (int i{}; i < hashGroups; i++) {
-		sum += table[i].size();
+		sum += table[i].size();//table[i].size() повертае розмір контейнеру з індексом і (кількість данних у ньому)
 	}
 
 	if (!sum) {
@@ -39,21 +39,23 @@ int HashTable::hashFunc(int key) {
 }
 
 void HashTable::insertItem(int key, string value) {
-	int hashValue = hashFunc(key);
-	auto& cell = table[hashValue];
-	auto bItr = begin(cell);
+	int hashValue = hashFunc(key);//присвоемо змінній hashValue значення ключа який пройшов через нашу хеш функцію
+	auto& cell = table[hashValue];//оператор auto& визначае тип змінної cell , як ПОСИЛАННЯ на об'єкт що зберігвється у ячейці table[hashValue]
+	auto bItr = begin(cell);// Утворює ітератор , який ми перекидаемо на початок списку , котрий лежить у контейнеру масива , функцією begin(cell)
 	bool keyExists = false;
-	for (; bItr != end(cell); bItr++) {
-		if (bItr->first == key) {
+	for (; bItr != end(cell); bItr++) {//циклом пробігаємо по списку
+		if (bItr->first == key) {//якщо перший елемент списку дорівнює ключу який ми додаємо 
 			keyExists = true;
-			bItr->second = value;
+			bItr->second = value;//присвоюємо нашему другому елементу списку нове значення value
 			cout << "[WARNING] Key exists. Value replaced."<<endl;
 			break;
 		}
 	}
 
 	if (!keyExists) {
-		cell.emplace_back(key, value);
+		cell.emplace_back(key, value);//доде нове значення до контейнера 
+
+
 	}
 	return;
 }
