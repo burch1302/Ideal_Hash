@@ -8,7 +8,7 @@ using namespace std;
 class HashTable {
 private:
 	static const int hashGroups = 10;//Кількість двозвьязних списків які ми будемо використовувати.
-        //
+	//
 	list<pair<int, string>> table[hashGroups]; // list 1 , index 0 , list 2 index 1...
 	//цей запис утворюе масив Table розмірністю hashGroups , який будет мати у собі списки які у свою чергу матимуть у собі два значення (int, string)
 
@@ -22,7 +22,7 @@ public:
 
 };
 //утворюэмо метод isEmpty з класу HashTable
-bool HashTable::isEmpty() const{
+bool HashTable::isEmpty() const {
 	int sum{};// фігурні дужки автоматично присвоють змінній sum нульове значення
 	for (int i{}; i < hashGroups; i++) {
 		sum += table[i].size();//table[i].size() повертае розмір контейнеру з індексом і (кількість данних у ньому)
@@ -47,7 +47,7 @@ void HashTable::insertItem(int key, string value) {
 		if (bItr->first == key) {//якщо перший елемент списку дорівнює ключу який ми додаємо 
 			keyExists = true;
 			bItr->second = value;//присвоюємо нашему другому елементу списку нове значення value
-			cout << "[WARNING] Key exists. Value replaced."<<endl;
+			cout << "[WARNING] Key exists. Value replaced." << endl;
 			break;
 		}
 	}
@@ -78,7 +78,7 @@ void HashTable::removeItem(int key) {
 		cout << "[WARNING] KEy not found.Pair not remove." << endl;
 	}
 	return;
-	
+
 }
 
 void HashTable::printTable() {
@@ -87,40 +87,54 @@ void HashTable::printTable() {
 
 		auto bItr = table[i].begin();
 		for (; bItr != table[i].end(); bItr++) {
-			cout << "[INFO] Key: "<<bItr->first<<"Value: "<<bItr->second<<endl;
+			cout << "[INFO] Key: " << bItr->first << endl<<"Value: " << bItr->second << endl;
 		}
 	}
 	return;
 }
 
 int main() {
-	HashTable HT;
+	HashTable ht;
 
-	if (HT.isEmpty()) {
-		cout << "Correct answe. Good job."<<endl;
+	int choice, key;
+	string value;
+
+	while (true) {
+		cout << "Enter your choice: " << endl;
+		cout << "1. Check if Hash-table is empty." << endl;
+		cout << "2. Insert item in hash table." << endl;
+		cout << "3. Remove item from hash-table." << endl;
+		cout << "4. Print all hash-table." << endl;
+		cout << "0. Exit." << endl;
+		cin >> choice;
+
+		switch (choice) {
+		case 0:
+			return 0;
+		case 1:
+			if (ht.isEmpty()) {
+				cout << "Hash-table is empty." << endl;
+			}
+			else {
+				cout << "Hash-table is not empty." << endl;
+			}
+			break;
+		case 2:
+			cout << "Enter key and value to insert: " << endl;
+			cin >> key >> value;
+			ht.insertItem(key, value);
+			break;
+		case 3:
+			cout << "Enter key to remove: " << endl;
+			cin >> key;
+			ht.removeItem(key);
+			break;
+		case 4:
+			ht.printTable();
+			break;
+		default:
+			cout << "Invalid choice. Try again." << endl;
+			break;
+		}
 	}
-	else {
-		cout << "oh oh oh. We need to chek out code!"<<endl;
-	}
-
-	HT.insertItem(905, "Danya");
-	HT.insertItem(301, "Bob");
-	HT.insertItem(407, "Pedro");
-	HT.insertItem(332, "GubkaBob");
-	HT.insertItem(553, "Sendi");
-	HT.insertItem(553, "Squid");
-
-	HT.printTable();
-
-	HT.removeItem(407);
-	HT.removeItem(100);
-
-	if (HT.isEmpty()) {
-		cout << "oh oh oh. We need to chek out code!" << endl;
-	}
-	else {
-		cout << "Correct answer.GJ!" << endl;
-	}
-
-	return 0;
 }
