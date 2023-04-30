@@ -1,6 +1,7 @@
 #include<iostream>
 #include<list>
 #include<cstring>
+#include<Windows.h>
 using namespace std;
 
 // Hash table to implamete 905, jimy
@@ -87,10 +88,23 @@ void HashTable::printTable() {
 
 		auto bItr = table[i].begin();
 		for (; bItr != table[i].end(); bItr++) {
-			cout << "[INFO] Key: " << bItr->first << endl<<"Value: " << bItr->second << endl;
+			cout << "[INFO] Key: " << bItr->first << endl << "Value: " << bItr->second << endl;
 		}
 	}
 	return;
+}
+
+string HashTable::serchTable(int key) {
+	for (int i{}; i < hashGroups; i++) {
+		if (table[i].size() == 0) continue;
+
+		auto bItr = table[i].begin();
+		for (; bItr != table[i].end(); bItr++) {
+			if (bItr->first == key)
+				return bItr->second;
+		}
+	}
+	return"";
 }
 
 int main() {
@@ -105,6 +119,7 @@ int main() {
 		cout << "2. Insert item in hash table." << endl;
 		cout << "3. Remove item from hash-table." << endl;
 		cout << "4. Print all hash-table." << endl;
+		cout << "5. Serch-table." << endl;
 		cout << "0. Exit." << endl;
 		cin >> choice;
 
@@ -112,28 +127,48 @@ int main() {
 		case 0:
 			return 0;
 		case 1:
+			system("cls");
 			if (ht.isEmpty()) {
 				cout << "Hash-table is empty." << endl;
 			}
 			else {
 				cout << "Hash-table is not empty." << endl;
 			}
+			system("pause");
+			system("cls");
 			break;
 		case 2:
+			system("cls");
 			cout << "Enter key and value to insert: " << endl;
 			cin >> key >> value;
 			ht.insertItem(key, value);
+			system("pause");
+			system("cls");
 			break;
 		case 3:
+			system("cls");
 			cout << "Enter key to remove: " << endl;
 			cin >> key;
 			ht.removeItem(key);
+			system("pause");
+			system("cls");
 			break;
 		case 4:
+			system("cls");
 			ht.printTable();
+			system("pause");
+			system("cls");
 			break;
 		default:
 			cout << "Invalid choice. Try again." << endl;
+			break;
+		case 5:
+			system("cls");
+			cout << "Enetr the key that you wont ti find: "<<endl;
+			cin >> key;
+			cout<<ht.serchTable(key)<<endl;
+			system("pause");
+			system("cls");
 			break;
 		}
 	}
