@@ -47,9 +47,13 @@ void HashTable::insertItem(int key, string value) {
 	for (; bItr != end(cell); bItr++) {//циклом пробігаємо по списку
 		if (bItr->first == key) {//якщо перший елемент списку дорівнює ключу який ми додаємо 
 			keyExists = true;
-			bItr->second = value;//присвоюємо нашему другому елементу списку нове значення value
+			cell.push_back(make_pair(key, value));//присвоюємо нашему другому елементу списку нове значення value
 			cout << "[WARNING] Key exists. Value replaced." << endl;
 			break;
+		}
+		if (!keyExists) {
+			//створюємо нову пару ключ-значення та додайте її до списку
+			cell.push_back(make_pair(key, value));
 		}
 	}
 
