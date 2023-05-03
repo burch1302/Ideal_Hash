@@ -8,7 +8,7 @@ using namespace std;
 
 class HashTable {
 private:
-	static const int hashGroups = 10;//Кількість двозвьязних списків які ми будемо використовувати.
+	static const int hashGroups = 11;//Кількість двозвьязних списків які ми будемо використовувати.
 	//
 	list<pair<int, string>> table[hashGroups]; // list 1 , index 0 , list 2 index 1...
 	//цей запис утворюе масив Table розмірністю hashGroups , який будет мати у собі списки які у свою чергу матимуть у собі два значення (int, string)
