@@ -87,15 +87,15 @@ void HashTable::removeItem(int key) {
 }
 
 void HashTable::printTable() {
-	for (int i{}; i < hashGroups; i++) {
+	for (int i = 0; i < hashGroups; i++) {
 		if (table[i].size() == 0) continue;
 
-		auto bItr = table[i].begin();
-		for (; bItr != table[i].end(); bItr++) {
-			cout << "[INFO] Key: " << bItr->first << endl << "Value: " << bItr->second << endl;
+		cout << "Hash Group " << i << ":" << endl;
+
+		for (const auto& pair : table[i]) {
+			cout << "Key: " << pair.first << ", Value: " << pair.second << endl;
 		}
 	}
-	return;
 }
 
 string HashTable::serchTable(int key) {
